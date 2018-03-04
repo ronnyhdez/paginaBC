@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Base R on &gt;Bio_code</title>
+    <link>/categories/base-r/</link>
+    <description>Recent content in Base R on &gt;Bio_code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/base-r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tiempo en R</title>
+      <link>/2018/03/tiempo-en-r/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/03/tiempo-en-r/</guid>
+      <description>TiempoLa medición del tiempo es algo que puede ser particular, ya que hay meses con diferente número de días, en distintos países la manera de colocar el dato del día o del mes se cambia, en años bisiestos febrero tiene un día extra entre otros factores, hay diferentes
+Por ende, hacer cálculos con fechas puede resultar algo complicado, sin embargo R tiene un sistema robusto para poder lidiar con estas situaciones.</description>
+    </item>
+    
+  </channel>
+</rss>
