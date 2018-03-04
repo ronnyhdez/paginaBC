@@ -1,0 +1,756 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Gráficos con ggplot2</title>
+    <meta name="author" content="&gt;Bio_code:: Bienvenidos">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+    <meta name="description" content=".col2 { columns: 2 200px; /* number of columns and width in pixels*/ -webkit-columns: 2 200px; /* chrome, safari */ -moz-columns: 2 200px; /* firefox */ } .col3 { columns: 3 100px; -webkit-columns: 3 100px; -moz-columns: 3 100px; }  El material de este taller ha sido creado por R-luminatis para estudiantes de biología de la Universidad Nacional de Costa Rica (e interesados en aprender).
+Si usted quiere ser partícipe de los talleres, o quiere organizar este mismo taller en su centro de estudio o grupo de trabajo, puede contactarnos a los correos:">
+    <meta property="og:description" content=".col2 { columns: 2 200px; /* number of columns and width in pixels*/ -webkit-columns: 2 200px; /* chrome, safari */ -moz-columns: 2 200px; /* firefox */ } .col3 { columns: 3 100px; -webkit-columns: 3 100px; -moz-columns: 3 100px; }  El material de este taller ha sido creado por R-luminatis para estudiantes de biología de la Universidad Nacional de Costa Rica (e interesados en aprender).
+Si usted quiere ser partícipe de los talleres, o quiere organizar este mismo taller en su centro de estudio o grupo de trabajo, puede contactarnos a los correos:">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Gráficos con ggplot2">
+    <meta property="og:url" content="/2018/03/gr%C3%A1ficos-con-ggplot2/">
+    <meta property="og:site_name" content="&gt;Bio_code">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="&gt;Bio_code">
+    <meta name="twitter:description" content=".col2 { columns: 2 200px; /* number of columns and width in pixels*/ -webkit-columns: 2 200px; /* chrome, safari */ -moz-columns: 2 200px; /* firefox */ } .col3 { columns: 3 100px; -webkit-columns: 3 100px; -moz-columns: 3 100px; }  El material de este taller ha sido creado por R-luminatis para estudiantes de biología de la Universidad Nacional de Costa Rica (e interesados en aprender).
+Si usted quiere ser partícipe de los talleres, o quiere organizar este mismo taller en su centro de estudio o grupo de trabajo, puede contactarnos a los correos:">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">&gt;Bio_code</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">&gt;Bio_code:: Bienvenidos</h4>
+        
+          <h5 class="sidebar-profile-bio">BioCode decodificando la ciencia, armando el futuro</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/BioCodeCR">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/636472/kakawait">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Gráficos con ggplot2
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-04T00:00:00Z">
+        
+  March 4, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/gr%c3%a1ficos">Gráficos</a>, 
+    
+      <a class="category-link" href="/categories/ggplot2">ggplot2</a>, 
+    
+      <a class="category-link" href="/categories/visualizaci%c3%b3n">visualización</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
+</style>
+<p>El material de este taller ha sido creado por <a href="https://www.facebook.com/groups/109321476192304/">R-luminatis</a> para estudiantes de biología de la Universidad Nacional de Costa Rica (e interesados en aprender).</p>
+<p>Si usted quiere ser partícipe de los talleres, o quiere organizar este mismo taller en su centro de estudio o grupo de trabajo, puede contactarnos a los correos:</p>
+<blockquote>
+<p>Contacto: <a href="mailto:ronny.hernandez@gmail.com">ronny.hernandez@gmail.com</a> / <a href="mailto:alvarovh95@gmail.com">alvarovh95@gmail.com</a></p>
+</blockquote>
+<div id="temas-de-la-sesion" class="section level2">
+<h2>Temas de la sesión</h2>
+<ul>
+<li>¿Por qué usar ggplot?</li>
+<li>Componentes de la gramática de capas</li>
+</ul>
+</div>
+<div id="por-que-usar-ggplot" class="section level2">
+<h2>¿Por qué usar ggplot?</h2>
+<p>ggplot permite generar gráficos 2D basados en capas, que se pueden adicionar en infinitas combinaciones, empoderando al científico para que pueda realizar gráficos imposibles para otros programas tradicionales. Como comprobación de esto, se le puede ver citado en artículos científicos de alto impacto, en los cuales jamás hubieran podido usar programas tradicionales o la versión básica de gráficos de R-base</p>
+<center>
+<img src="https://s-media-cache-ak0.pinimg.com/originals/2e/98/21/2e9821f6d89d0976ea01b1883a0d209b.png" alt="Drawing" style="width: 900px;"/>
+</center>
+<p>Problemas en otros programas:</p>
+<ul>
+<li>Pocas opciones especiales y populares en botones</li>
+<li>Poca capacidad de edición gráfica</li>
+</ul>
+<center>
+<img src="https://s-media-cache-ak0.pinimg.com/564x/7e/0c/60/7e0c6054ff61e08249bd20b06ce20c46.jpg" alt="Drawing" style="width: 400px;"/>
+</center>
+<p>Solución:<br />
+Grammar of graphics (Wilkinson, 2005)</p>
+<center>
+<img src="https://s-media-cache-ak0.pinimg.com/564x/c8/67/7e/c8677e810538cfea2b240713e62d5a02.jpg" alt="Drawing" style="width: 400px;"/>
+</center>
+<div id="fuente-httpswww.sylvaindurand.orgspatial-data-analysis-with-r" class="section level6">
+<h6>Fuente: <a href="https://www.sylvaindurand.org/spatial-data-analysis-with-R/" class="uri">https://www.sylvaindurand.org/spatial-data-analysis-with-R/</a></h6>
+<p>Problema en alternativa “R base”:</p>
+<ul>
+<li>Gráficos guardados como imágenes
+<ul>
+<li>Compuestas de elementos “crudos” difíciles de editar y combinar</li>
+</ul></li>
+</ul>
+<pre class="r"><code>plot(iris$Sepal.Length,iris$Sepal.Width, col=iris$Species, 
+     xlab=&quot;Sepal length&quot;,ylab=&quot;Sepal width&quot;,pch=16)</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/Code Chunk-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>Solución:</p>
+<p>Programación de gráficos por capas.</p>
+<pre class="r"><code>library(ggplot2)
+ggplot(iris, aes(Sepal.Length,Sepal.Width,colour=Species))+
+  geom_point()+
+  geom_smooth()+
+  xlab(&quot;Sepal length&quot;)+
+  ylab(&quot;Sepal width&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/unnamed-chunk-1-1.png" width="384" style="display: block; margin: auto;" /></p>
+<div class="col2">
+<pre class="r"><code>plot(iris$Sepal.Length, iris$Sepal.Width,xlab=&quot;Sepal length&quot;,
+     ylab = &quot;Sepal or petal width&quot;)
+points(iris$Sepal.Length, iris$Petal.Width, col = &quot;red&quot;)</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(iris,aes(Sepal.Length, Sepal.Width))+
+xlab(&quot;Sepal length&quot;)+ ylab(&quot;Sepal or petal width&quot;)+
+geom_point()+
+geom_point(aes(Sepal.Length, Petal.Width),col=&quot;red&quot;)</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/unnamed-chunk-2-2.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="componentes-de-la-gramatica-de-capas" class="section level2">
+<h2>Componentes de la gramática de capas</h2>
+<ul>
+<li>Siempre se inicia con <em>ggplot()</em>, incluyendo dataset y aesthetics <span style="font-size:small"> (opcional) </span></li>
+</ul>
+<pre class="r"><code>ggplot(iris,aes(Sepal.Length, Sepal.Width))</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/unnamed-chunk-3-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p><span style="font-size:small"> Otra opci?n: <em>qpot()</em><br />
+* Funciona parecido a <em>plot</em> de r-base, pero es muy limitada </span></p>
+</div>
+<div id="componentes-de-la-gramatica-de-capas-1" class="section level2">
+<h2>Componentes de la gramática de capas</h2>
+<ul>
+<li>Data</li>
+<li>Aesthetic mapping</li>
+<li>Geometric object</li>
+<li>Statistical transformations</li>
+<li>Scales</li>
+<li>Coordinate system</li>
+<li>Position adjustments</li>
+<li><p>Faceting</p></li>
+<li>Condición: tipo de dato Dataframe
+<ul>
+<li>Más fácil de guardar y reproducir</li>
+</ul></li>
+<li><p>Usualmente se usa dplyr antes de graficar</p></li>
+</ul>
+<div id="aesthetic-mapping" class="section level3">
+<h3>Aesthetic mapping</h3>
+<ul>
+<li>Se definen con aes()</li>
+<li>Significado de <em>aesthetic</em> en ggplot: “Algo que se puede ver”</li>
+<li>Cada <em>geom</em> acepta un conjunto de aesthetics</li>
+<li>Ejemplos:
+<ul>
+<li>position (i.e., en el eje “x” y “y”)</li>
+<li>color (color “exterior”)</li>
+<li>fill (color “interior”)</li>
+<li>shape (de los puntos)</li>
+<li>linetype</li>
+<li>size</li>
+</ul></li>
+<li>Ejemplos</li>
+</ul>
+<pre class="r"><code>ggplot(iris,aes(Sepal.Length,Sepal.Width,col=Species))+
+  geom_point()+
+  stat_smooth()</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(iris,aes(Sepal.Length,Sepal.Width,col=Species))+
+  geom_point()+
+  geom_smooth(method = &quot;lm&quot;,se=F)</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(iris,aes(Sepal.Length,Sepal.Width,col=Species))+
+  geom_point()+
+  geom_smooth(method = &quot;lm&quot;,se=T)</code></pre>
+<p><img src="2018-03-04-gráficos-con-ggplot2_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Más ejemplos en <a href="http://www.cookbook-r.com/Graphs/Scatterplots_(ggplot2)/" class="uri">http://www.cookbook-r.com/Graphs/Scatterplots_(ggplot2)/</a></p>
+</div>
+</div>
+<div id="referencias" class="section level2">
+<h2>Referencias</h2>
+<p>Wickham, H. (2016). ggplot2: elegant graphics for data analysis. Springer.</p>
+<p><a href="http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html" class="uri">http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html</a></p>
+<p><a href="https://rpubs.com/hadley/ggplot2-layers" class="uri">https://rpubs.com/hadley/ggplot2-layers</a></p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/ggplot2/">ggplot2</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/visualizacion-datos/">visualizacion datos</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/graficos/">graficos</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/tiempo-en-r/" data-tooltip="Tiempo en R">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/groups/109321476192304/%25!%28EXTRA%20string=/2018/03/gr%C3%A1ficos-con-ggplot2/%29">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/gr%C3%A1ficos-con-ggplot2/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/gr%C3%A1ficos-con-ggplot2/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 &gt;Bio_code:: Bienvenidos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/tiempo-en-r/" data-tooltip="Tiempo en R">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/groups/109321476192304/%25!%28EXTRA%20string=/2018/03/gr%C3%A1ficos-con-ggplot2/%29">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/gr%C3%A1ficos-con-ggplot2/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/gr%C3%A1ficos-con-ggplot2/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/groups/109321476192304/%25!%28EXTRA%20string=%2F2018%2F03%2Fgr%25C3%25A1ficos-con-ggplot2%2F%29">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fgr%25C3%25A1ficos-con-ggplot2%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fgr%25C3%25A1ficos-con-ggplot2%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">&gt;Bio_code:: Bienvenidos</h4>
+    
+      <div id="about-card-bio">BioCode decodificando la ciencia, armando el futuro</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Biología
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Costa Rica, Centroamérica
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/gr%C3%A1ficos-con-ggplot2/">
+                <h3 class="media-heading">Gráficos con ggplot2</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">.col2 { columns: 2 200px; /* number of columns and width in pixels*/ -webkit-columns: 2 200px; /* chrome, safari */ -moz-columns: 2 200px; /* firefox */ } .col3 { columns: 3 100px; -webkit-columns: 3 100px; -moz-columns: 3 100px; }  El material de este taller ha sido creado por R-luminatis para estudiantes de biología de la Universidad Nacional de Costa Rica (e interesados en aprender).
+Si usted quiere ser partícipe de los talleres, o quiere organizar este mismo taller en su centro de estudio o grupo de trabajo, puede contactarnos a los correos:</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/tiempo-en-r/">
+                <h3 class="media-heading">Tiempo en R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">TiempoLa medición del tiempo es algo que puede ser particular, ya que hay meses con diferente número de días, en distintos países la manera de colocar el dato del día o del mes se cambia, en años bisiestos febrero tiene un día extra entre otros factores, hay diferentes
+Por ende, hacer cálculos con fechas puede resultar algo complicado, sin embargo R tiene un sistema robusto para poder lidiar con estas situaciones.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         2 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/paisaje.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/03\/gr%C3%A1ficos-con-ggplot2\/';
+          
+            this.page.identifier = '\/2018\/03\/gr%C3%A1ficos-con-ggplot2\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

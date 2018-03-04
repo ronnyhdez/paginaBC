@@ -6,10 +6,20 @@
     <description>Recent content on &gt;Bio_code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Graficos con ggplot2</title>
+      <link>/2018/03/graficos-con-ggplot2/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/03/graficos-con-ggplot2/</guid>
+      <description>.col2 { columns: 2 200px; /* number of columns and width in pixels*/ -webkit-columns: 2 200px; /* chrome, safari */ -moz-columns: 2 200px; /* firefox */ } .col3 { columns: 3 100px; -webkit-columns: 3 100px; -moz-columns: 3 100px; }  El material de este taller ha sido creado por BioCode para estudiantes de biología de la Universidad Nacional de Costa Rica (e interesados en aprender).
+Si usted quiere ser partícipe de los talleres, o quiere organizar este mismo taller en su centro de estudio o grupo de trabajo, puede contactarnos a los correos:</description>
+    </item>
     
     <item>
       <title>Tiempo en R</title>

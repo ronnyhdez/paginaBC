@@ -1,0 +1,172 @@
+---
+title: Graficos con ggplot2
+author: Alvaro Vega Hidalgo
+date: '2018-03-04'
+slug: graficos-con-ggplot2
+output: html_document
+categories:
+  - Graficos
+  - ggplot2
+  - visualización
+tags:
+  - ggplot2
+  - visualizacion datos
+  - graficos
+---
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
+</style>
+
+El material de este taller ha sido creado por [BioCode](https://www.facebook.com/groups/109321476192304/) para estudiantes de biología de la Universidad Nacional de Costa Rica (e interesados en aprender).
+
+Si usted quiere ser partícipe de los talleres, o quiere organizar este mismo taller en su centro de estudio o grupo de trabajo, puede contactarnos a los correos:
+
+> Contacto: ronny.hernandez@gmail.com / alvarovh95@gmail.com
+
+## Temas de la sesión
+- ¿Por qué usar ggplot?
+- Componentes de la gramática de capas
+
+## ¿Por qué usar ggplot?
+
+ggplot permite generar gráficos 2D basados en capas, que se pueden adicionar en infinitas combinaciones, empoderando al científico para que pueda realizar gráficos imposibles para otros programas tradicionales. Como comprobación de esto, se le puede ver citado en artículos científicos de alto impacto, en los cuales jamás hubieran podido usar programas tradicionales o la versión básica de gráficos de R-base
+
+
+<center><img src="https://s-media-cache-ak0.pinimg.com/originals/2e/98/21/2e9821f6d89d0976ea01b1883a0d209b.png" alt="Drawing" style="width: 900px;"/></center>
+
+
+Problemas en otros programas:
+
+- Pocas opciones especiales y populares en botones
+- Poca capacidad de edición gráfica
+
+<center><img src="https://s-media-cache-ak0.pinimg.com/564x/7e/0c/60/7e0c6054ff61e08249bd20b06ce20c46.jpg" alt="Drawing" style="width: 400px;"/></center>
+
+
+Solución:  
+Grammar of graphics (Wilkinson, 2005)
+
+<center><img src="https://s-media-cache-ak0.pinimg.com/564x/c8/67/7e/c8677e810538cfea2b240713e62d5a02.jpg" alt="Drawing" style="width: 400px;"/></center>  
+###### Fuente: https://www.sylvaindurand.org/spatial-data-analysis-with-R/
+
+Problema en alternativa "R base":
+
+* Gráficos guardados como imágenes
+    + Compuestas de elementos "crudos" difíciles de editar y combinar
+
+```{r Code Chunk, fig.align='center', fig.height=4, fig.width=4}
+plot(iris$Sepal.Length,iris$Sepal.Width, col=iris$Species, 
+     xlab="Sepal length",ylab="Sepal width",pch=16)
+```
+
+
+Solución:  
+
+Programación de gráficos por capas.
+
+```{r,warning=F,fig.height=3,fig.width=4,fig.align='center'}
+library(ggplot2)
+ggplot(iris, aes(Sepal.Length,Sepal.Width,colour=Species))+
+  geom_point()+
+  geom_smooth()+
+  xlab("Sepal length")+
+  ylab("Sepal width")
+```
+
+
+<div class="col2">
+```{r,fig.height=3,fig.width=4,fig.align="center"}
+plot(iris$Sepal.Length, iris$Sepal.Width,xlab="Sepal length",
+     ylab = "Sepal or petal width")
+points(iris$Sepal.Length, iris$Petal.Width, col = "red")
+
+ggplot(iris,aes(Sepal.Length, Sepal.Width))+
+xlab("Sepal length")+ ylab("Sepal or petal width")+
+geom_point()+
+geom_point(aes(Sepal.Length, Petal.Width),col="red")
+```
+</div>
+
+## Componentes de la gramática de capas
+* Siempre se inicia con _ggplot()_, incluyendo dataset y aesthetics <span style="font-size:small"> (opcional) </span>
+
+```{r, fig.align="center",fig.height=3,fig.width=3}
+ggplot(iris,aes(Sepal.Length, Sepal.Width))
+```
+  
+  
+  
+  
+<span style="font-size:small">  Otra opci?n: _qpot()_  
+* Funciona parecido a _plot_ de r-base, pero es muy limitada </span>
+
+## Componentes de la gramática de capas
+* Data
+* Aesthetic mapping
+* Geometric object
+* Statistical transformations
+* Scales
+* Coordinate system
+* Position adjustments
+* Faceting
+
+
+
+* Condición: tipo de dato Dataframe
+    + Más fácil de guardar y reproducir
+* Usualmente se usa dplyr antes de graficar
+
+###Aesthetic mapping
+
+* Se definen con aes()
+* Significado de _aesthetic_ en ggplot: "Algo que se puede ver"
+* Cada _geom_  acepta un conjunto de aesthetics
+* Ejemplos:
+    + position (i.e., en el eje "x" y "y")
+    + color (color "exterior")
+    + fill (color "interior")
+    + shape (de los puntos)
+    + linetype
+    + size
+
+
+* Ejemplos
+```{r,fig.align='center',fig.height=5,fig.width=6}
+ggplot(iris,aes(Sepal.Length,Sepal.Width,col=Species))+
+  geom_point()+
+  stat_smooth()
+
+```
+```{r,fig.align='center',fig.height=5,fig.width=6}
+ggplot(iris,aes(Sepal.Length,Sepal.Width,col=Species))+
+  geom_point()+
+  geom_smooth(method = "lm",se=F)
+```
+
+```{r,fig.align='center',fig.height=5,fig.width=6}
+ggplot(iris,aes(Sepal.Length,Sepal.Width,col=Species))+
+  geom_point()+
+  geom_smooth(method = "lm",se=T)
+```
+
+Más ejemplos en 
+http://www.cookbook-r.com/Graphs/Scatterplots_(ggplot2)/
+
+
+## Referencias
+
+Wickham, H. (2016). ggplot2: elegant graphics for data analysis. Springer.
+
+http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html
+
+https://rpubs.com/hadley/ggplot2-layers  
+
